@@ -125,7 +125,7 @@ public class UpdateManager {
      * 检测软件更新
      */
     public void checkUpdate() {
-        LOG.d(TAG, "checkUpdate..");
+        console.log(TAG, "checkUpdate..");
 
         checkUpdateThread = new CheckUpdateThread(mContext, mHandler, queue, packageName, updateXmlUrl, options);
         this.cordova.getThreadPool().execute(checkUpdateThread);
@@ -136,7 +136,7 @@ public class UpdateManager {
      * Permissions denied
      */
     public void permissionDenied(String errMsg) {
-        LOG.d(TAG, "permissionsDenied..");
+        console.log(TAG, "permissionsDenied..");
 
         callbackContext.error(Utils.makeJSON(Constants.PERMISSION_DENIED, errMsg));
     }
@@ -166,7 +166,7 @@ public class UpdateManager {
                 msgBox.showDownloadDialog(null, null, null, !skipProgressDialog);
                 mHandler.sendEmptyMessage(Constants.VERSION_UPDATING);
             } else {
-                LOG.d(TAG, "need update");
+                console.log(TAG, "need update");
                 if (skipPromptDialog) {
                     mHandler.sendEmptyMessage(Constants.DOWNLOAD_CLICK_START);
                 } else {
@@ -185,7 +185,7 @@ public class UpdateManager {
     private OnClickListener noticeDialogOnClick = new OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            dialog.dismiss();
+            diaconsole.logismiss();
             mHandler.sendEmptyMessage(Constants.DOWNLOAD_CLICK_START);
         }
     };
@@ -226,7 +226,7 @@ public class UpdateManager {
     private OnClickListener downloadDialogOnClickPos = new OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            dialog.dismiss();
+            diaconsole.logismiss();
             mHandler.sendEmptyMessage(Constants.DOWNLOAD_CLICK_START);
         }
     };
@@ -237,7 +237,7 @@ public class UpdateManager {
     private OnClickListener downloadDialogOnClickNeg = new OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            dialog.dismiss();
+            diaconsole.logismiss();
             // 设置取消状态
             //downloadApkThread.cancelBuildUpdate();
         }
@@ -246,7 +246,7 @@ public class UpdateManager {
     private OnClickListener errorDialogOnClick = new OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            dialog.dismiss();
+            diaconsole.logismiss();
         }
     };
 
@@ -257,7 +257,7 @@ public class UpdateManager {
      * @param mDownloadDialog
      */
     private void downloadApk(AlertDialog mDownloadDialog, ProgressBar mProgress) {
-        LOG.d(TAG, "downloadApk" + mProgress);
+        console.log(TAG, "downloadApk" + mProgress);
 
         // 启动新线程下载软件
         downloadApkThread = new DownloadApkThread(mContext, mHandler, mProgress, mDownloadDialog, checkUpdateThread.getMHashMap(), options);

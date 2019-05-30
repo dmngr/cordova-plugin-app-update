@@ -39,7 +39,7 @@ public class MsgBox {
      */
     public Dialog showNoticeDialog(OnClickListener onClickListener) {
         if (noticeDialog == null) {
-            LOG.d(TAG, "showNoticeDialog");
+            console.log(TAG, "showNoticeDialog");
             // 构造对话框
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
             builder.setTitle(msgHelper.getString(MsgHelper.UPDATE_TITLE));
@@ -64,7 +64,7 @@ public class MsgBox {
                                                   OnClickListener onClickListenerNeu,
                                                   boolean showDialog) {
         if (downloadDialog == null) {
-            LOG.d(TAG, "showDownloadDialog");
+            console.log(TAG, "showDownloadDialog");
 
             // 构造软件下载对话框
             AlertDialog.Builder builder = new Builder(mContext);
@@ -108,7 +108,7 @@ public class MsgBox {
      */
     public Dialog showErrorDialog(OnClickListener errorDialogOnClick) {
         if (this.errorDialog == null) {
-            LOG.d(TAG, "initErrorDialog");
+            console.log(TAG, "initErrorDialog");
             // 构造对话框
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
             builder.setTitle(msgHelper.getString(MsgHelper.UPDATE_ERROR_TITLE));

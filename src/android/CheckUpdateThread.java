@@ -73,7 +73,7 @@ public class CheckUpdateThread implements Runnable {
      * @return
      */
     private InputStream returnFileIS(String path) {
-        LOG.d(TAG, "returnFileIS..");
+        console.log(TAG, "returnFileIS..");
 
         URL url = null;
         InputStream is = null;
@@ -116,7 +116,7 @@ public class CheckUpdateThread implements Runnable {
      * @return
      */
     private int getVersionCodeLocal(Context context) {
-        LOG.d(TAG, "getVersionCode..");
+        console.log(TAG, "getVersionCode..");
 
         int versionCode = 0;
         try {
