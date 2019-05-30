@@ -149,12 +149,12 @@ public class UpdateManager {
         int versionCodeLocal = version.getLocal();
         int versionCodeRemote = version.getRemote();
 
-        boolean skipPromptDialog = false;
+        boolean skipPromptDialog = true;
         try {
             skipPromptDialog = options.getBoolean("skipPromptDialog");
         } catch (JSONException e) {}
 
-        boolean skipProgressDialog = false;
+        boolean skipProgressDialog = true;
         try {
             skipProgressDialog = options.getBoolean("skipProgressDialog");
         } catch (JSONException e) {}
@@ -193,7 +193,7 @@ public class UpdateManager {
     private void emitNoticeDialogOnClick() {
         isDownloading = true;
 
-        boolean skipProgressDialog = false;
+        boolean skipProgressDialog = true;
         try {
             skipProgressDialog = options.getBoolean("skipProgressDialog");
         } catch (JSONException e) {}
