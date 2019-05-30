@@ -9,7 +9,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
-import org.apache.cordova.LOG;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +39,7 @@ public class MsgBox {
      */
     public Dialog showNoticeDialog(OnClickListener onClickListener) {
         if (noticeDialog == null) {
-            console.log("showNoticeDialog");
+            Log.d(TAG, "showNoticeDialog");
             // 构造对话框
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
             builder.setTitle(msgHelper.getString(MsgHelper.UPDATE_TITLE));
@@ -64,7 +64,7 @@ public class MsgBox {
                                                   OnClickListener onClickListenerNeu,
                                                   boolean showDialog) {
         if (downloadDialog == null) {
-            console.log("showDownloadDialog");
+            Log.d(TAG, "showDownloadDialog");
 
             // 构造软件下载对话框
             AlertDialog.Builder builder = new Builder(mContext);
@@ -108,7 +108,7 @@ public class MsgBox {
      */
     public Dialog showErrorDialog(OnClickListener errorDialogOnClick) {
         if (this.errorDialog == null) {
-            console.log("initErrorDialog");
+            Log.d(TAG, "initErrorDialog");
             // 构造对话框
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
             builder.setTitle(msgHelper.getString(MsgHelper.UPDATE_ERROR_TITLE));

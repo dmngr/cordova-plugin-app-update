@@ -8,7 +8,7 @@ import android.os.Handler;
 import android.widget.ProgressBar;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
-import org.apache.cordova.LOG;
+import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -125,7 +125,7 @@ public class UpdateManager {
      * 检测软件更新
      */
     public void checkUpdate() {
-        console.log("checkUpdate..");
+        Log.d(TAG, "checkUpdate..");
 
         checkUpdateThread = new CheckUpdateThread(mContext, mHandler, queue, packageName, updateXmlUrl, options);
         this.cordova.getThreadPool().execute(checkUpdateThread);
@@ -136,7 +136,7 @@ public class UpdateManager {
      * Permissions denied
      */
     public void permissionDenied(String errMsg) {
-        console.log("permissionsDenied..");
+        Log.d(TAG, "permissionsDenied..");
 
         callbackContext.error(Utils.makeJSON(Constants.PERMISSION_DENIED, errMsg));
     }
@@ -149,12 +149,12 @@ public class UpdateManager {
         int versionCodeLocal = version.getLocal();
         int versionCodeRemote = version.getRemote();
 
-        boolean skipPromptDialog = true;
+        boolean skipPromptDialog = false;
         try {
             skipPromptDialog = options.getBoolean("skipPromptDialog");
         } catch (JSONException e) {}
 
-        boolean skipProgressDialog = true;
+        boolean skipProgressDialog = false;
         try {
             skipProgressDialog = options.getBoolean("skipProgressDialog");
         } catch (JSONException e) {}
@@ -166,7 +166,7 @@ public class UpdateManager {
                 msgBox.showDownloadDialog(null, null, null, !skipProgressDialog);
                 mHandler.sendEmptyMessage(Constants.VERSION_UPDATING);
             } else {
-                console.log("need update");
+                Log.d(TAG, "need update");
                 if (skipPromptDialog) {
                     mHandler.sendEmptyMessage(Constants.DOWNLOAD_CLICK_START);
                 } else {
@@ -185,7 +185,7 @@ public class UpdateManager {
     private OnClickListener noticeDialogOnClick = new OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            diaconsole.logismiss();
+            dialog.dismiss();
             mHandler.sendEmptyMessage(Constants.DOWNLOAD_CLICK_START);
         }
     };
@@ -193,7 +193,7 @@ public class UpdateManager {
     private void emitNoticeDialogOnClick() {
         isDownloading = true;
 
-        boolean skipProgressDialog = true;
+        boolean skipProgressDialog = false;
         try {
             skipProgressDialog = options.getBoolean("skipProgressDialog");
         } catch (JSONException e) {}
@@ -226,7 +226,7 @@ public class UpdateManager {
     private OnClickListener downloadDialogOnClickPos = new OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            diaconsole.logismiss();
+            dialog.dismiss();
             mHandler.sendEmptyMessage(Constants.DOWNLOAD_CLICK_START);
         }
     };
@@ -237,7 +237,7 @@ public class UpdateManager {
     private OnClickListener downloadDialogOnClickNeg = new OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            diaconsole.logismiss();
+            dialog.dismiss();
             // 设置取消状态
             //downloadApkThread.cancelBuildUpdate();
         }
@@ -246,7 +246,7 @@ public class UpdateManager {
     private OnClickListener errorDialogOnClick = new OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            diaconsole.logismiss();
+            dialog.dismiss();
         }
     };
 
@@ -257,7 +257,7 @@ public class UpdateManager {
      * @param mDownloadDialog
      */
     private void downloadApk(AlertDialog mDownloadDialog, ProgressBar mProgress) {
-        console.log("downloadApk" + mProgress);
+        Log.d(TAG, "downloadApk" + mProgress);
 
         // 启动新线程下载软件
         downloadApkThread = new DownloadApkThread(mContext, mHandler, mProgress, mDownloadDialog, checkUpdateThread.getMHashMap(), options);

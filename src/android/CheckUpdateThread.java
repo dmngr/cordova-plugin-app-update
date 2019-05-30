@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Handler;
 import android.util.Base64;
-import org.apache.cordova.LOG;
 import org.json.JSONObject;
 import org.json.JSONException;
 
@@ -16,6 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import android.util.Log;
 
 import 	java.nio.charset.StandardCharsets;
 
@@ -73,7 +73,7 @@ public class CheckUpdateThread implements Runnable {
      * @return
      */
     private InputStream returnFileIS(String path) {
-        console.log("returnFileIS..");
+        Log.d(TAG, "returnFileIS..");
 
         URL url = null;
         InputStream is = null;
@@ -116,7 +116,7 @@ public class CheckUpdateThread implements Runnable {
      * @return
      */
     private int getVersionCodeLocal(Context context) {
-        console.log("getVersionCode..");
+        Log.d(TAG, "getVersionCode..");
 
         int versionCode = 0;
         try {
