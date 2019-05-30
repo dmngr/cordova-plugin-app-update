@@ -90,19 +90,19 @@ public class DownloadHandler extends Handler {
      * 安装APK文件
      */
     private void installApk() {
-        console.log(TAG, "Installing APK");
+        console.log("Installing APK");
 
         File apkFile = new File(mSavePath, mHashMap.get("name")+".apk");
         if (!apkFile.exists()) {
-            LOG.e(TAG, "Could not find APK: " + mHashMap.get("name"));
+            LOG.e("Could not find APK: " + mHashMap.get("name"));
             return;
         }
 
-        console.log(TAG, "APK Filename: " + apkFile.toString());
+        console.log("APK Filename: " + apkFile.toString());
 
         // 通过Intent安装APK文件
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-            console.log(TAG, "Build SDK Greater than or equal to Nougat");
+            console.log("Build SDK Greater than or equal to Nougat");
             String applicationId = (String) BuildHelper.getBuildConfigValue((Activity) mContext, "APPLICATION_ID");
             Uri apkUri = FileProvider.getUriForFile(mContext, applicationId + ".appupdate.provider", apkFile);
             Intent i = new Intent(Intent.ACTION_INSTALL_PACKAGE);
@@ -110,7 +110,7 @@ public class DownloadHandler extends Handler {
             i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             mContext.startActivity(i);
         }else{
-            console.log(TAG, "Build SDK less than Nougat");
+            console.log("Build SDK less than Nougat");
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.setDataAndType(Uri.parse("file://" + apkFile.toString()), "application/vnd.android.package-archive");

@@ -125,7 +125,7 @@ public class UpdateManager {
      * 检测软件更新
      */
     public void checkUpdate() {
-        console.log(TAG, "checkUpdate..");
+        console.log("checkUpdate..");
 
         checkUpdateThread = new CheckUpdateThread(mContext, mHandler, queue, packageName, updateXmlUrl, options);
         this.cordova.getThreadPool().execute(checkUpdateThread);
@@ -136,7 +136,7 @@ public class UpdateManager {
      * Permissions denied
      */
     public void permissionDenied(String errMsg) {
-        console.log(TAG, "permissionsDenied..");
+        console.log("permissionsDenied..");
 
         callbackContext.error(Utils.makeJSON(Constants.PERMISSION_DENIED, errMsg));
     }
@@ -166,7 +166,7 @@ public class UpdateManager {
                 msgBox.showDownloadDialog(null, null, null, !skipProgressDialog);
                 mHandler.sendEmptyMessage(Constants.VERSION_UPDATING);
             } else {
-                console.log(TAG, "need update");
+                console.log("need update");
                 if (skipPromptDialog) {
                     mHandler.sendEmptyMessage(Constants.DOWNLOAD_CLICK_START);
                 } else {
@@ -257,7 +257,7 @@ public class UpdateManager {
      * @param mDownloadDialog
      */
     private void downloadApk(AlertDialog mDownloadDialog, ProgressBar mProgress) {
-        console.log(TAG, "downloadApk" + mProgress);
+        console.log("downloadApk" + mProgress);
 
         // 启动新线程下载软件
         downloadApkThread = new DownloadApkThread(mContext, mHandler, mProgress, mDownloadDialog, checkUpdateThread.getMHashMap(), options);
